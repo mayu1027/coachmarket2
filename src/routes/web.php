@@ -29,3 +29,4 @@ Route::get('/sell',[ItemController::class, 'sellView']);
 Route::post('/sell',[ItemController::class, 'sellCreate']);
 
 Route::get('/mypage/profile', [UserController::class, 'profile']);
+Route::post('/mypage/profile', [UserController::class, 'updateProfile']);
