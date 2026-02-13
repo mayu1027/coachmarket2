@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class Item extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'price',
         'brand',
         'description',
         'img_url',
-        'user_id', 
+        'user_id',
         'condition_id',
     ];
 

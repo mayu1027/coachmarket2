@@ -24,6 +24,8 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 */
 
 Route::get('/',[ItemController::class, 'index'])->name('items.list');
+Route::get('/item/{item}',[ItemController::class, 'detail'])->name('item.detail');
+Route::get('/item', [ItemController::class, 'search']);
 
 Route::get('/sell',[ItemController::class, 'sellView']);
 Route::post('/sell',[ItemController::class, 'sellCreate']);
