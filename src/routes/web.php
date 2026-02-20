@@ -29,6 +29,9 @@ Route::get('/item', [ItemController::class, 'search']);
 
 Route::get('/sell',[ItemController::class, 'sellView']);
 Route::post('/sell',[ItemController::class, 'sellCreate']);
+Route::post('/item/comment/{item_id}',[CommentController::class, 'create']);
+Route::post('/item/like/{item_id}',[LikeController::class, 'create']);
+Route::post('/item/unlike/{item_id}',[LikeController::class, 'destroy']);
 
 Route::get('/mypage/profile', [UserController::class, 'profile']);
 Route::post('/mypage/profile', [UserController::class, 'updateProfile']);

@@ -35,37 +35,37 @@ class ItemController extends Controller
 
         return view('index',compact('items','tab', 'search'));
     }
-    
+
     public function detail(Item $item){
         return view('detail', compact('item'));
     }
-    
+
     public function search(Request $request){
         $search_word = $request->search_item;
         $query = Item::query();
         $query = Item::scopeItem($query, $search_word);
-        
+
         $items = $query->get();
         return view('index', compact('items'));
     }
-    
+
     public function sellView(){
         $categories = Category::all();
         $conditions = Condition::all();
         return view('sell',compact('categories', 'conditions'));
     }
-    
+
     public function sellCreate(ItemRequest $request){
-        
+
         $img = $request->file('img_url');
-        
+
         try {
             //code...
             $img_url = Storage::disk('local')->put('public/img', $img);
         } catch (\Throwable $th) {
             throw $th;
         }
-        
+
         $item = Item::create([
             'name' => $request->name,
             'price' => $request->price,
@@ -75,14 +75,14 @@ class ItemController extends Controller
             'condition_id' => $request->condition_id,
             'user_id' => Auth::id(),
         ]);
-        
+
         foreach ($request->categories as $category_id){
             CategoryItem::create([
                 'item_id' => $item->id,
                 'category_id' => $category_id
             ]);
         }
-        
+
         return redirect()->route('item.detail',['item' => $item->id]);
     }
 }
